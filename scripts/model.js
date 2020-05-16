@@ -1,5 +1,5 @@
 //Model Crl
-const Model = (function() {
+const Model = (function () {
   const key = "85341b33";
 
   //Search only movies
@@ -32,7 +32,7 @@ const Model = (function() {
   }
 
   function updateFavoritePage(movieID, cb) {
-    searchById(movieID).then(item => {
+    searchById(movieID).then((item) => {
       cb(item);
     });
   }
@@ -55,6 +55,6 @@ const Model = (function() {
     searchById,
     updateFavoritePage,
 
-    checkPoster
+    checkPoster,
   };
 })();

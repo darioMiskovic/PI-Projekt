@@ -39,21 +39,93 @@ function korisničko_ime(){
    
 }
 
-/*
-    function provjeri_korisnika($konekcija){
-    $sql = "SELECT * FROM users WHERE email=? AND lozinka=?";
+/*Friend Requests */
+
+
+function sendRequest($sendFrom,$sendTo,$konekcija){
+    $sql = "INSERT INTO sendreq VALUES (null, ?, ?)";
     $upit = $konekcija->prepare($sql);
-    if (!isset($_SESSION["email"])) return false;
-    $upit->execute(
-        [$_SESSION["email"], $_SESSION["lozinka"]]
-    );
-    $korisnik = $upit->fetch();
-    if(!isset($korisnik["kor_ime"])) return false;
-    return $korisnik;
+    return $upit->execute([$sendFrom, $sendTo]);
+
+}
+function requested($sendTo,$sendFrom,$konekcija){
+    $sql = "INSERT INTO received VALUES (null, ?, ?)";
+    $upit = $konekcija->prepare($sql);
+    return $upit->execute([$sendTo, $sendFrom]);
 }
 
-*/
+//get data
 
+function getRequest($toUser,$konekcija){
+    $sql = "SELECT from_user FROM received WHERE to_user = ?";
+    $upit = $konekcija->prepare($sql);
+     $upit->execute([$toUser]);
+     $friendReq = $upit->fetch();
+     return $friendReq;
+}
+
+function getSendRequest($sendFrom,$konekcija){
+    $sql = "SELECT to_user FROM sendreq WHERE from_user = ?";
+    $upit = $konekcija->prepare($sql);
+     $upit->execute([$sendFrom]);
+     $friendReq = $upit->fetch();
+     return $friendReq;
+}
+
+//delete
+function deleteReceived($toUser,$konekcija){
+    $sql = "DELETE  FROM received WHERE to_user = ?";
+    $upit = $konekcija->prepare($sql);
+     $upit->execute([$toUser]);
+     
+}
+
+function deleteSendRequest($fromUser,$konekcija){
+    $sql = "DELETE  FROM sendreq WHERE from_user = ?";
+    $upit = $konekcija->prepare($sql);
+     $upit->execute([$fromUser]);
+     
+}
+
+//update
+function updatetRequest($sendFrom,$toUser,$konekcija){
+    $sql = "UPDATE received SET from_user= ? WHERE to_user = ?";
+    $upit = $konekcija->prepare($sql);
+     $upit->execute([$sendFrom,$toUser]);
+    
+}
+
+function updatetSendRequest($toUser,$sendFrom,$konekcija){
+    $sql = "UPDATE  sendreq SET to_user= ? WHERE from_user = ?";
+    $upit = $konekcija->prepare($sql);
+     $upit->execute([$toUser,$sendFrom]);
+     
+}
+
+
+
+
+function addFriend($mainUser,$newFriend,$konekcija){
+    $sql = "INSERT INTO friends_list VALUES (null,?,?)";
+    $upit = $konekcija->prepare($sql);
+    
+     $upit->execute([$mainUser,$newFriend]);
+}
+
+function getFriends($korisnik,$konekcija){
+    $sql = "SELECT friends FROM  friends_list  WHERE kor_ime = ?";
+    $upit = $konekcija->prepare($sql);
+    
+     $upit->execute([$korisnik]);
+     $friendList = $upit->fetch();
+     return $friendList;
+}
+
+function updateFriendsList($newFriend,$korisnik,$konekcija){
+    $sql = "UPDATE  friends_list SET friends= ? WHERE kor_ime = ?";
+    $upit = $konekcija->prepare($sql);
+     $upit->execute([$newFriend,$korisnik]);
+}
 
 
 

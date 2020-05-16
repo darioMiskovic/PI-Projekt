@@ -3,7 +3,7 @@
 $server ='localhost';
 $korisnik="root";
 $lozinka = "";
-$baza = "loginsystem";
+$baza = "pi-projekt";
 
 try {
     $konekcija = new PDO("mysql:host=$server;dbname=$baza", $korisnik, $lozinka);

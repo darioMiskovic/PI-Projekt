@@ -74,6 +74,9 @@
     
 
     <script type="text/javascript" >
+     const userForm = document.getElementById('form2');
+      const userValue = document.getElementById('ime-korisnika');
+    document.addEventListener('click',e=>e.target.id !== "ime-korisnika" ? userValue.style.width = '0px':  userValue.style.width = '250px');
     
 
 
@@ -128,7 +131,10 @@
 });
 
       
-      
+const userNot = document.querySelector('.user-notification');
+      const notifphp = ( <?php  echo json_encode($check); ?>);
+      console.log(notifphp);
+      (notifphp) ? userNot.classList.add('user-active'): false;
     </script>
    
   </body>

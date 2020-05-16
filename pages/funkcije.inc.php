@@ -15,6 +15,15 @@ function update_imdbid ( $movie_id,$kor_ime, $konekcija){
     return $upit->execute([ $movie_id,$kor_ime]);
 }
 
+function userInfo($userName,$konekcija){
+    $sql = "SELECT  movie_id FROM imdbid WHERE kor_ime =?" ;
+    $upit = $konekcija->prepare($sql);
+    $upit->execute([$userName]);
+    $korisnik = $upit->fetch();
+    return $korisnik[0];
+    
+}
+
 
 function provjeri_korisnika2($konekcija){
     $sql = "SELECT id FROM imdbid WHERE kor_ime =?" ;
@@ -48,5 +57,7 @@ function provjeriDuplikat($id,$str){
 
     
 }
+
+
 
 ?>

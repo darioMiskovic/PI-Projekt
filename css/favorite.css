@@ -4,3 +4,25 @@
   margin-bottom: 20px;
   font-family: var(--open-ss);
 }
+
+.user-notification {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.user-active {
+  color: var(--primary-color);
+  font-size: 20px;
+  padding: 2px;
+  position: relative;
+}
+
+.user-active::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}

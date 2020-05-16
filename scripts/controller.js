@@ -1,11 +1,12 @@
 //Controller
-const Ctrl = (function(model, view) {
+const Ctrl = (function (model, view) {
   //Get DOM Object from View Ctrl
   const domElements = view.domElements;
 
   //Events
   domElements.form.addEventListener("submit", getInputValue);
   domElements.form.addEventListener("submit", getInput);
+
   domElements.container.addEventListener("click", ShowList);
   domElements.container.addEventListener("click", goBack);
 
@@ -58,10 +59,10 @@ const Ctrl = (function(model, view) {
     let cardMovies = model.onlyMovies(saveInput);
     let cardSeries = model.onlySeries(saveInput);
 
-    [cardMovies, cardSeries].forEach(item => {
-      item.then(res => {
+    [cardMovies, cardSeries].forEach((item) => {
+      item.then((res) => {
         const data = res.data.Search;
-        data.forEach(el => insertMovie(el));
+        data.forEach((el) => insertMovie(el));
         domElements.icons.style.display = "block";
       });
     });
@@ -74,10 +75,10 @@ const Ctrl = (function(model, view) {
     view.cleanContainer();
     let card = model.sortType(query, type);
 
-    card.then(res => {
+    card.then((res) => {
       const data = res.data.Search;
 
-      data.forEach(el => insertMovie(el));
+      data.forEach((el) => insertMovie(el));
       domElements.icons.style.display = "block";
     });
   }
@@ -97,7 +98,7 @@ const Ctrl = (function(model, view) {
     let id = sessionStorage.getItem("movieId");
     // let id = view.loadinfoID();
 
-    model.searchById(id).then(item => {
+    model.searchById(id).then((item) => {
       const output = `
       <div class="container-info">
       <div class='child-info'>
@@ -173,10 +174,19 @@ const Ctrl = (function(model, view) {
     }
   }
 
+  function userFavorites(arr) {
+    arr.forEach((movie) => {
+      model.searchById(movie).then((item) => {
+        insertMovie(item);
+      });
+    });
+  }
+
   return {
     cardInfo,
     updateFavorite,
     insertMovie,
-    addClassFav
+    addClassFav,
+    userFavorites,
   };
 })(Model, View);

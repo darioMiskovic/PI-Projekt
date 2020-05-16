@@ -3,6 +3,7 @@
       $idsDB = array();
       array_push($idsDB,provjeri_id($konekcija));
       
+
      
       
     ?>
@@ -26,8 +27,10 @@
 
         if(e.target.id === 'posterInfo'){
          
+          
+         
           const arrayFromPHP = (<?php echo json_encode($idsDB); ?>)[0].split(",");
-
+          
           Ctrl.cardInfo(arrayFromPHP);
 
         }else if (e.target.classList.contains("unliked")) {
@@ -62,7 +65,32 @@
           
         }
       });
+
+
+      const userForm = document.getElementById('form2');
+      const userValue = document.getElementById('ime-korisnika');
+      document.addEventListener('click',e=>e.target.id !== "ime-korisnika" ? userValue.style.width = '0px':  userValue.style.width = '250px');
+
+      userForm.addEventListener('submit',e=>{
+       const findUser = (userValue.value);
+       
+       $.ajax({
+            url:'checkUser.php',
+            method:'post',
+            data:{userName:findUser},
+            success: function(data){
+              location.href = 'user.php';
+            }          
+          });
+
+      })
     
+
+      const userNot = document.querySelector('.user-notification');
+      const notifphp = ( <?php  echo json_encode($check); ?>);
+      
+      (notifphp) ? userNot.classList.add('user-active'): false;
+      userNot.addEventListener('click',()=> location.href='friends.php');
     </script>
   </body>
 </html>

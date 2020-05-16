@@ -1,7 +1,8 @@
 //View Ctrl
-const View = (function() {
+const View = (function () {
   const domElements = {
     form: document.getElementById("form"),
+
     movieInput: document.getElementById("ime-filma"),
     container: document.querySelector(".container"),
     icons: document.querySelector(".menu-icons"),
@@ -9,7 +10,7 @@ const View = (function() {
     series: document.getElementById("series"),
     home: document.getElementById("home"),
     topRates: document.getElementById("topRated"),
-    favorite: document.getElementById("favorite")
+    favorite: document.getElementById("favorite"),
   };
 
   function cleanInput() {
@@ -18,7 +19,7 @@ const View = (function() {
 
   function cleanContainer() {
     const card = document.querySelectorAll(".card");
-    [...card].forEach(el => domElements.container.removeChild(el));
+    [...card].forEach((el) => domElements.container.removeChild(el));
   }
 
   loadinfoID = () => document.querySelector(".poster").dataset.id;
@@ -43,6 +44,6 @@ const View = (function() {
     cleanInput,
     cleanContainer,
     loadinfoID,
-    limitTile
+    limitTile,
   };
 })();

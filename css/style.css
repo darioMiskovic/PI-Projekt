@@ -40,11 +40,24 @@ body {
   padding-left: 10px;
 }
 
-.form {
+.form,
+.form2 {
   display: flex;
 }
 
-.form [type="text"] {
+.form {
+  margin-left: 20px;
+}
+
+.form2 {
+  margin-left: auto;
+  margin-right: 20px;
+  align-self: stretch;
+  padding: 12px;
+}
+
+#ime-filma,
+#ime-korisnika {
   padding: 0 30px;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -53,9 +66,19 @@ body {
   font-size: 18px;
   background-color: var(--body-color);
   color: #fafafa;
+  transition: all 0.6s ease-in-out;
 }
 
-.form .btn {
+#ime-korisnika {
+  width: 0px;
+}
+/* 
+#active-form {
+  width: 250px;
+} */
+
+.form .btn,
+.form2 .btn {
   padding: 10px;
 
   color: var(--primary-color);
@@ -69,7 +92,22 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-.form .btn:hover {
+.form .btn2 {
+  padding: 10px;
+
+  color: var(--primary-color);
+  background-color: var(--body-color);
+  border: none;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  outline: none;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form .btn:hover,
+.form2 .btn:hover {
   background-color: var(--primary-color);
   color: var(--body-color);
 }
@@ -104,6 +142,30 @@ body {
   font-size: 20px;
 }
 
+.user-notification {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.user-active {
+  color: var(--primary-color);
+  font-size: 20px;
+  padding: 2px;
+  position: relative;
+}
+
+.user-active::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+ul.nav-ul {
+  margin-top: 48px;
+}
 nav ul li {
   list-style: none;
 }
@@ -113,6 +175,27 @@ nav ul li ul {
   visibility: hidden;
 }
 
+/*Friend request*/
+.fr-req {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 17px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.prijatelji {
+  display: none;
+  background-color: var(--primary-color);
+}
+
+.poslano {
+  display: none;
+  background-color: #8000ff;
+}
+.dodaj {
+  background-color: #2ca23d;
+}
 nav ul li ul li a {
   color: var(--body-color);
   text-decoration: none;
@@ -549,4 +632,51 @@ footer .social-media a {
     justify-content: center;
     align-items: center;
   }
+}
+
+/*friends*/
+
+.friend-list ul li {
+  font-size: 20px;
+  list-style: none;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #5f5959;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+}
+.friend-list ul li:hover {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+.obavjesti-box {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #5f5959;
+}
+
+.potvrdi {
+  background: #138440;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.odbij {
+  background: red;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.zahtjev {
+  font-size: 25px;
+}
+
+.obBoxContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
